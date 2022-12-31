@@ -13,6 +13,9 @@ class User < ApplicationRecord
             presence: true,
             uniqueness: true
 
+  validates :navbar_color,
+            format: { with: /\A[a-fA-F0-9]{6}\z/ }
+
   def downcase_nickname
     nickname.downcase!
   end

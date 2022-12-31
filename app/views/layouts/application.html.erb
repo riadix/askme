@@ -17,7 +17,7 @@
       <p class="title-sm text-bold"><%= link_to 'Ask me!', root_path %></p>
       <div>
         <% if current_user.present? %>
-          <%= link_to 'Change color', choose_navbar_color_user_path(current_user), class: 'mr-sm' %>
+          <%= link_to 'Edit user', edit_user_path(current_user), class: 'mr-sm' %>
           <%= content_tag 'span', display_nickname(current_user), class: 'mr-sm' %>
           <%= button_to 'Logout', session_path, method: :delete %>
         <% else %>

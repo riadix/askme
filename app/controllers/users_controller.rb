@@ -43,11 +43,6 @@ class UsersController < ApplicationController
     redirect_to root_path, notice: 'User deleted'
   end
 
-  def choose_navbar_color
-    @user = User.find(params[:id])
-
-  end
-
   private
 
   def user_params

@@ -14,11 +14,5 @@ Rails.application.routes.draw do
 
   resources :users, only: %i[new create edit update destroy]
 
-  resources :users do
-    member do
-      get :choose_navbar_color
-    end
-  end
-
   resource :session, only: %i[new create destroy]
 end
