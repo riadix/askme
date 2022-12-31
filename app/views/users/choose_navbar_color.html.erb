@@ -1,0 +1,12 @@
+<div class="container">
+  <h2 class="title">Choose a new navbar color!</h2>
+
+  <div class="mt">
+    <%= form_with model: @user, data: {turbo: false} do |form| %>
+      <p><%= form.label :navbar_color, 'Color' %></p>
+      <p><%= form.text_field :navbar_color, class: 'form-text-field' %></p>
+
+      <p class="mt-lg"><%= form.submit 'Enter', class: 'button button-main' %></p>
+    <% end %>
+  </div>
+</div>
