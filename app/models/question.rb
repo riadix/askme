@@ -2,7 +2,7 @@ class Question < ApplicationRecord
   belongs_to :user
 
   validates :body,
-            format: { without: /[<>]/ },
+            format: { without: /<.+>/ },
             length: { maximum: 280 },
             presence: true
 end
