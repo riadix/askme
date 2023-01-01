@@ -4,8 +4,4 @@ module UsersHelper
     "@#{user.nickname}"
   end
 
-  def color(user)
-    "##{user.navbar_color}"
-  end
-
 end
