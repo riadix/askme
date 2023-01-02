@@ -5,7 +5,7 @@ class QuestionsController < ApplicationController
     @question = Question.new(question_params)
 
     if @question.save
-      redirect_to question_path(@question), notice: 'New question created'
+      redirect_to user_path(@question.user), notice: 'New question created'
     else
       flash.now[:alert] = 'Please enter the question'
 
@@ -16,13 +16,15 @@ class QuestionsController < ApplicationController
   def update
     @question.update(question_params)
 
-    redirect_to question_path(@question), notice: 'Question saved'
+    redirect_to user_path(@question.user), notice: 'Question saved'
   end
 
   def destroy
+    @user = @question.user
+
     @question.destroy
 
-    redirect_to questions_path, notice: 'Question deleted'
+    redirect_to user_path(@user), notice: 'Question deleted'
   end
 
   def show
@@ -34,7 +36,8 @@ class QuestionsController < ApplicationController
   end
 
   def new
-    @question = Question.new
+    @user = User.find(params[:user_id])
+    @question = Question.new(user: @user)
   end
 
   def edit
