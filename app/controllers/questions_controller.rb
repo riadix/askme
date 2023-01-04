@@ -1,7 +1,10 @@
 class QuestionsController < ApplicationController
-  before_action :set_question, only: %i[update show destroy edit]
+  before_action :ensure_current_user, only: %i[update destroy edit]
+  before_action :set_question_for_current_user, only: %i[update destroy edit]
 
   def create
+    question_params = params.require(:question).permit(:body, :user_id)
+
     @question = Question.new(question_params)
 
     if @question.save
@@ -14,6 +17,8 @@ class QuestionsController < ApplicationController
   end
 
   def update
+    question_params = params.require(:question).permit(:body, :answer)
+
     @question.update(question_params)
 
     redirect_to user_path(@question.user), notice: 'Question saved'
@@ -28,6 +33,7 @@ class QuestionsController < ApplicationController
   end
 
   def show
+    @question = Question.find(params[:id])
   end
 
   def index
@@ -45,11 +51,11 @@ class QuestionsController < ApplicationController
 
   private
 
-  def question_params
-    params.require(:question).permit(:body, :user_id, :hidden)
+  def ensure_current_user
+    redirect_with_alert unless current_user.present?
   end
 
-  def set_question
-    @question = Question.find(params[:id])
+  def set_question_for_current_user
+    @question = current_user.questions.find(params[:id])
   end
 end

@@ -7,6 +7,10 @@ a, button {
   color: #DC2F02;
 }
 
+.center-text {
+  text-align: center;
+}
+
 .title-lg {
   font-size: 175%;
 }
@@ -29,6 +33,10 @@ a, button {
 
 .text-red {
   color: #d00000;
+}
+
+.text-dark-red {
+  color: #9D0208;
 }
 
 .text-bold {

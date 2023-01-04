@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  has_many :questions, dependent: :delete_all
+  has_many :questions, dependent: :destroy
 
   has_secure_password
 
@@ -16,7 +16,7 @@ class User < ApplicationRecord
             uniqueness: true
 
   validates :navbar_color,
-            format: { with: /\A#[a-fA-F0-9]{6}\z/ }
+            format: { with: /\A#([[:xdigit:]]{3}){1,2}\z/ }
 
   private
 

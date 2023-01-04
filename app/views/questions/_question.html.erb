@@ -1,17 +1,26 @@
 <div class="mb-sm">
-  <%= simple_format sanitize(question.body) %>
+  <%= simple_format strip_tags(sanitize(question.body)) %>
 </div>
+
+<% if question.answer.present? %>
+  <div class="mb-sm text-dark-red">
+    <%= question.answer %>
+  </div>
+<% end %>
 
 <div class="text-sm question-footer">
   <div class="text-grey">
     <%= l(question.created_at, format: :short) %>
   </div>
 
-  <div>
-    <%= link_to fa_icon("pencil"), edit_question_path(question),
-                title: "Edit question" %>
-    <%= button_to fa_icon("trash-o"), question_path(question),
-                  method: :delete, title: "Delete question",
-                  form: {data: {turbo_confirm: "Are you sure you want to delete?"}} %>
-  </div>
+  <% if current_user == question.user %>
+    <div>
+      <% edit_icon = (question.answer.present?) ? 'pencil' : 'reply' %>
+      <%= link_to fa_icon(edit_icon), edit_question_path(question),
+                  title: "Edit question", class: 'mr-sm' %>
+      <%= button_to fa_icon("trash-o"), question_path(question),
+                    method: :delete, title: "Delete question",
+                    form: {data: {turbo_confirm: "Are you sure you want to delete?"}} %>
+    </div>
+  <% end %>
 </div>
