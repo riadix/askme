@@ -1,6 +1,8 @@
 <div class="container">
   <h2 class="title-lg mb-sm">New question</h2>
-  <p class="mb">for <%= link_to display_nickname(@user), user_path(@user) %></p>
+  <% if @user.present? %>
+    <p class="mb">for <%= link_to display_nickname(@user), user_path(@user) %></p>
+  <% end %>
 
   <% if @question.errors.any? %>
     <div class="mt">

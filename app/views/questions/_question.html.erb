@@ -11,6 +11,7 @@
 <div class="text-sm question-footer">
   <div class="text-grey">
     <%= l(question.created_at, format: :short) %>
+    <%= render 'questions/author', author: find_author(question) %>
   </div>
 
   <% if current_user == question.user %>

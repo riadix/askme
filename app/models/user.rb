@@ -16,7 +16,8 @@ class User < ApplicationRecord
             uniqueness: true
 
   validates :navbar_color,
-            format: { with: /\A#([[:xdigit:]]{3}){1,2}\z/ }
+            format: { with: /\A#([[:xdigit:]]{3}){1,2}\z/ },
+            allow_nil: true
 
   private
 
