@@ -1,6 +1,8 @@
 <div class="text-bold mt-sm">
   <% if author.present? %>
-    <%= link_to display_nickname(author), user_path(author), class: 'mr-sm' %>
+    <p>From:
+      <%= link_to display_nickname(author), user_path(author), class: 'mr-sm' %>
+    </p>
   <% else %>
     <p class="text-blue">Anonymous</p>
   <% end %>

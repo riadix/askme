@@ -1,14 +1,12 @@
 <div class="container">
+
   <h2 class="title-lg mb">Question <%= @question.id %></h2>
+  <p class="mt-sm">
+    <%= link_to "All questions for @#{@question.user.nickname}", user_path(@question.user) %>
+  </p>
 
-  <p class="mb-sm"><%= simple_format strip_tags(sanitize(question.body)) %></p>
-  <p>user_id: <b><%= @question.user_id %></b></p>
+</div>
 
-  <div class="mt">
-    <%= link_to fa_icon("pencil"), edit_question_path(@question), title: "Edit question" %>
-    <%= button_to fa_icon("trash-o"), question_path(@question), method: :delete, title: "Delete question",
-                  form: {data: {turbo_confirm: "Are you sure you want to delete?"}} %>
-  </div>
-
-  <p class="mt"><%= link_to "All questions", questions_path %></p>
+<div class="container mt-sm">
+  <%= render 'question', question: @question %>
 </div>

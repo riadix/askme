@@ -3,6 +3,10 @@ class User < ApplicationRecord
 
   has_secure_password
 
+  def to_param
+    nickname
+  end
+
   before_validation :downcase_nickname, :downcase_email
 
   validates :nickname,
@@ -18,6 +22,9 @@ class User < ApplicationRecord
   validates :navbar_color,
             format: { with: /\A#([[:xdigit:]]{3}){1,2}\z/ },
             allow_nil: true
+
+  include Gravtastic
+  gravtastic(secure: true, filetype: :png, size: 100, default: 'retro')
 
   private
 

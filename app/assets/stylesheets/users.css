@@ -1,0 +1,38 @@
+.users-box {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.users-box-user {
+  flex-basis: 100px;
+  flex-grow: 0;
+  height: 100px;
+  line-height: 100px;
+  text-align: center;
+}
+
+.users-box-user a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.users-box-user-bg0 {
+  border: 3px solid #c6ddf0;
+}
+
+.users-box-user-bg1 {
+  border: 3px solid #c99dA3;
+}
+
+.users-box-user-bg2 {
+  border: 3px solid #996888;
+}
+
+.users-box-user-bg3 {
+  border: 3px solid #5e4955;
+}
+
+.users-box-user-bg4 {
+  border: 3px solid #2a2b2a;
+}
