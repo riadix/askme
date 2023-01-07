@@ -12,7 +12,11 @@ Rails.application.routes.draw do
 
   resources :questions
 
-  resources :users, except: %i[index]
+  resources :users, param: :nickname, except: %i[index]
+
+  # match '/:id', :to => "users#show", :as => :user, :via => :get
+  # match '/:id', :to => "users#update", :as => :user, :via => :put
+  # match '/:id', :to => "users#destroy", :as => :user, :via => :delete
 
   resource :session, only: %i[new create destroy]
 

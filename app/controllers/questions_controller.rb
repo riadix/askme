@@ -4,7 +4,7 @@ class QuestionsController < ApplicationController
 
   def create
     question_params = params.require(:question).permit(:body, :user_id)
-    question_params[:author_id] = current_user[:id] if current_user
+    question_params[:author] = current_user
 
     @question = Question.new(question_params)
 
@@ -38,12 +38,12 @@ class QuestionsController < ApplicationController
   end
 
   def index
-    @questions = Question.order(created_at: :desc).last(10)
-    @users = User.order(created_at: :desc).last(10)
+    @questions = Question.order(created_at: :desc).first(10)
+    @users = User.order(created_at: :desc).first(10)
   end
 
   def new
-    @user = User.find(params[:user_id])
+    @user = User.find_by!(nickname: params[:user_nickname])
     @question = Question.new(user: @user)
   end
 

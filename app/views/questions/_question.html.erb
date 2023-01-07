@@ -4,7 +4,7 @@
 
 <% if question.answer.present? %>
   <div class="mb-sm text-dark-red">
-    <%= question.answer %>
+    <%= simple_format strip_tags(sanitize(question.answer)) %>
   </div>
 <% end %>
 
