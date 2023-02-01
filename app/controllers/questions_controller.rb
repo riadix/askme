@@ -67,9 +67,11 @@ class QuestionsController < ApplicationController
   # hashtag
   def hashtag_check
     hashtags = @question.body.scan(/#\w+/)
+    hashtags += @question.answer.scan(/#\w+/) if @question.answer.present?
     return true if hashtags.blank?
 
     hashtags.each do |tag|
+      tag = tag.downcase
       if Hashtag.where(name: tag).present?
         @new_hashtag = Hashtag.find_by(name: tag)
       else
