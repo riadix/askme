@@ -10,6 +10,17 @@
   </div>
 </div>
 
+<% if @hashtags.present? %>
+  <div class="container mt-sm">
+    <h2 class="text-bold">Hashtags</h2>
+    <div class="hashtags-box">
+      <% @hashtags.each do |hashtag| %>
+        <div class="hashtag"><%= render partial: 'hashtags/hashtag', locals: {hashtag: hashtag} %></div>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+
 <div class="container mt-sm">
   <h2 class="title-lg">
     Last

@@ -1,0 +1,8 @@
+<div class="container">
+  <h3 class="text-bold">Questions with "<%= @hashtag.name %>"</h3>
+  <% @hashtag.questions.each do |question| %>
+    <div class="mt-md">
+      <%= render partial: 'questions/question', locals: {question: question} %>
+    </div>
+  <% end %>
+</div>

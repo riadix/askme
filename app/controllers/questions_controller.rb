@@ -2,9 +2,11 @@ class QuestionsController < ApplicationController
   before_action :ensure_current_user, only: %i[update destroy edit]
   before_action :set_question_for_current_user, only: %i[update destroy edit]
 
+  # hashtags
+  after_action :hashtag_check, only: %i[create update]
+
   def create
     question_params = params.require(:question).permit(:body, :user_id)
-    # question_params[:author] = current_user
 
     @question = Question.new(question_params)
     @question.author = current_user
@@ -41,6 +43,7 @@ class QuestionsController < ApplicationController
   def index
     @questions = Question.order(created_at: :desc).first(10)
     @users = User.order(created_at: :desc).first(10)
+    @hashtags = Hashtag.order(created_at: :desc).first(10)
   end
 
   def new
@@ -59,5 +62,20 @@ class QuestionsController < ApplicationController
 
   def set_question_for_current_user
     @question = current_user.questions.find(params[:id])
+  end
+
+  # hashtag
+  def hashtag_check
+    hashtags = @question.body.scan(/#\w+/)
+    return true if hashtags.blank?
+
+    hashtags.each do |tag|
+      if Hashtag.where(name: tag).present?
+        @new_hashtag = Hashtag.find_by(name: tag)
+      else
+        @new_hashtag = Hashtag.create(name: tag)
+      end
+      @new_hashtag.questions += [@question]
+    end
   end
 end

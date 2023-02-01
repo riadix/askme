@@ -1,0 +1,8 @@
+.hashtags-box {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.hashtag {
+  margin-right: 7px;
+}
