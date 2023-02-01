@@ -30,8 +30,19 @@ class QuestionsController < ApplicationController
 
   def destroy
     @user = @question.user
+    @hashtags = @question.body.scan(/#\w+/)
+    @hashtags += @question.answer.scan(/#\w+/) if @question.answer.present?
 
     @question.destroy
+
+    if @hashtags.present?
+      @hashtags.each do |hashtag|
+        hashtag = Hashtag.find_by(name: hashtag)
+        if hashtag.questions.blank?
+          hashtag.destroy
+        end
+      end
+    end
 
     redirect_to user_path(@user), notice: 'Question deleted'
   end
